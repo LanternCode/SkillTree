@@ -25,9 +25,9 @@ class Skill extends Component {
                     this.props.handleLock(this.props.skill, cannotBeUnlocked);
                 }}
             >
-                {cannotBeUnlocked ? "?" : this.props.skill.name}
+                {this.props.hidden ? "?" : this.props.skill.name}
                 <br />
-                {cannotBeUnlocked ? "" : this.props.skill.description}
+                {this.props.hidden ? "" : this.props.skill.description}
             </div>
         );
     }

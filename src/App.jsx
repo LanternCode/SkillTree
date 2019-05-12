@@ -119,6 +119,7 @@ class App extends Component {
     handleLock = (skill, cannotBeUnlocked) => {
         const skills = [...this.state.skills];
 
+        //unlock skill
         if (skill.unlocked) {
             const currentSkillPoints = this.state.currentSkillPoints - 1;
             this.setState({ currentSkillPoints });
@@ -139,8 +140,15 @@ class App extends Component {
             });
             this.setState({ ownedSkills });
 
+            let depthReached = this.state.depthReached;
+            if (skill.depth === this.state.depthReached) {
+                depthReached--;
+                this.setState({ depthReached });
+            }
+
             this.setState({ skills });
         } else if (!cannotBeUnlocked) {
+            //lock skill
             const currentSkillPoints = this.state.currentSkillPoints + 1;
             if (currentSkillPoints <= this.state.maximumSkillPoints) {
                 this.setState({ currentSkillPoints });
@@ -149,6 +157,9 @@ class App extends Component {
 
                 const ownedSkills = [skill.id, ...this.state.ownedSkills];
                 this.setState({ ownedSkills });
+
+                const depthReached = skill.depth;
+                this.setState({ depthReached });
 
                 this.setState({ skills });
             }
@@ -170,6 +181,11 @@ class App extends Component {
                                 key={skill.id}
                                 skill={skill}
                                 unlockedSkills={this.state.ownedSkills}
+                                hidden={
+                                    skill.depth > this.state.depthReached + 1
+                                        ? true
+                                        : false
+                                }
                                 handleLock={this.handleLock}
                             />
                         );

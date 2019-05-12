@@ -1,0 +1,33 @@
+.skills {
+    display: grid;
+    grid-template-rows: 2;
+}
+
+.skill {
+    border: 1px solid black;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    grid-row: 1;
+}
+
+.skill-unlocked {
+    background-color: green;
+}
+
+.skill-cannotBeUnlocked {
+    background-color: gray;
+}
+
+.skill-depth-1 {
+    grid-row: 1;
+}
+
+.skill-depth-2 {
+    grid-row: 2;
+}
+
+.skill-depth-3 {
+    grid-row: 3;
+}

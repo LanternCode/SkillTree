@@ -141,11 +141,11 @@ class App extends Component {
             this.setState({ ownedSkills });
 
             let depthRemoved = true;
-            this.state.skills.map((playerSkill, i) => {
+            this.state.skills.map(playerSkill => {
                 if (
                     skill.id !== playerSkill.id &&
-                    skill.depth === this.state.depthReached &&
-                    skill.unlocked === true
+                    playerSkill.depth === this.state.depthReached &&
+                    playerSkill.unlocked === true
                 )
                     depthRemoved = false;
                 return null;
@@ -169,7 +169,8 @@ class App extends Component {
                 this.setState({ ownedSkills });
 
                 const depthReached = skill.depth;
-                this.setState({ depthReached });
+                if (depthReached > this.state.depthReached)
+                    this.setState({ depthReached });
 
                 this.setState({ skills });
             }

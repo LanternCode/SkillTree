@@ -119,46 +119,59 @@ class App extends Component {
     handleLock = (skill, cannotBeUnlocked) => {
         const skills = [...this.state.skills];
 
-        //unlock skill
+        //cancel skill
         if (skill.unlocked) {
-            const currentSkillPoints = this.state.currentSkillPoints - 1;
-            this.setState({ currentSkillPoints });
-            skill.unlocked = !skill.unlocked;
-            skills[skill.id] = skill;
-
-            let ownedSkills = [...this.state.ownedSkills];
-
-            ownedSkills.map((mapedSkill, i) => {
-                if (mapedSkill === skill.id) {
-                    ownedSkills[i] = null;
-                }
-                return null;
-            });
-            ownedSkills = ownedSkills.filter(id => {
-                if (id === 0) return "0";
-                else return id != null;
-            });
-            this.setState({ ownedSkills });
-
-            let depthRemoved = true;
-            this.state.skills.map(playerSkill => {
+            let allowCancel = true;
+            this.state.skills.map(singleSkill => {
                 if (
-                    skill.id !== playerSkill.id &&
-                    playerSkill.depth === this.state.depthReached &&
-                    playerSkill.unlocked === true
+                    singleSkill.requirements.includes(skill.id) &&
+                    singleSkill.unlocked
                 )
-                    depthRemoved = false;
+                    allowCancel = false;
+                //you cannot cancel this skill because you have already unlocked another skill requiring this skill
                 return null;
             });
 
-            if (depthRemoved) {
-                let depthReached = this.state.depthReached - 1;
-                this.setState({ depthReached });
-            }
+            if (allowCancel) {
+                const currentSkillPoints = this.state.currentSkillPoints - 1;
+                this.setState({ currentSkillPoints });
+                skill.unlocked = !skill.unlocked;
+                skills[skill.id] = skill;
 
-            this.setState({ skills });
+                let ownedSkills = [...this.state.ownedSkills];
+
+                ownedSkills.map((mapedSkill, i) => {
+                    if (mapedSkill === skill.id) {
+                        ownedSkills[i] = null;
+                    }
+                    return null;
+                });
+                ownedSkills = ownedSkills.filter(id => {
+                    if (id === 0) return "0";
+                    else return id != null;
+                });
+                this.setState({ ownedSkills });
+
+                let depthRemoved = true;
+                this.state.skills.map(playerSkill => {
+                    if (
+                        skill.id !== playerSkill.id &&
+                        playerSkill.depth === this.state.depthReached &&
+                        playerSkill.unlocked === true
+                    )
+                        depthRemoved = false;
+                    return null;
+                });
+
+                if (depthRemoved) {
+                    let depthReached = this.state.depthReached - 1;
+                    this.setState({ depthReached });
+                }
+
+                this.setState({ skills });
+            }
         } else if (!cannotBeUnlocked) {
-            //lock skill
+            //buy new skill
             const currentSkillPoints = this.state.currentSkillPoints + 1;
             if (currentSkillPoints <= this.state.maximumSkillPoints) {
                 this.setState({ currentSkillPoints });

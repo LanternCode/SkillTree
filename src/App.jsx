@@ -110,7 +110,7 @@ class App extends Component {
                 requirements: [7, 8]
             }
         ],
-        maximumSkillPoints: 5,
+        maximumSkillPoints: 10,
         currentSkillPoints: 0,
         ownedSkills: [],
         depthReached: 0
@@ -126,9 +126,17 @@ class App extends Component {
                 if (
                     singleSkill.requirements.includes(skill.id) &&
                     singleSkill.unlocked
-                )
+                ) {
                     allowCancel = false;
-                //you cannot cancel this skill because you have already unlocked another skill requiring this skill
+                    let appearedIn = 0;
+
+                    singleSkill.requirements.map(singleReq => {
+                        if (skills[singleReq].unlocked) appearedIn++;
+                        return null;
+                    });
+                    allowCancel = appearedIn === 2 ? true : false;
+                }
+
                 return null;
             });
 
@@ -169,6 +177,8 @@ class App extends Component {
                 }
 
                 this.setState({ skills });
+            } else {
+                //you cannot cancel this skill because you have already unlocked another skill requiring this skill
             }
         } else if (!cannotBeUnlocked) {
             //buy new skill

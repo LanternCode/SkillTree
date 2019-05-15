@@ -122,6 +122,9 @@ class App extends Component {
         //cancel skill
         if (skill.unlocked) {
             let allowCancel = true;
+            let allowCancelCounter = 0;
+            let oldAllowCancel = true;
+            let allowCancelChanged = false;
             this.state.skills.map(singleSkill => {
                 if (
                     singleSkill.requirements.includes(skill.id) &&
@@ -134,13 +137,19 @@ class App extends Component {
                         if (skills[singleReq].unlocked) appearedIn++;
                         return null;
                     });
+                    allowCancelCounter++;
                     allowCancel = appearedIn === 2 ? true : false;
+                    if (allowCancelCounter === 1) oldAllowCancel = allowCancel;
+
+                    if (allowCancelCounter === 2)
+                        allowCancelChanged =
+                            allowCancel === oldAllowCancel ? false : true;
                 }
 
                 return null;
             });
 
-            if (allowCancel) {
+            if (allowCancel && allowCancelChanged === false) {
                 const currentSkillPoints = this.state.currentSkillPoints - 1;
                 this.setState({ currentSkillPoints });
                 skill.unlocked = !skill.unlocked;

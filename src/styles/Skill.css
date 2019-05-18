@@ -1,6 +1,7 @@
 .skills {
     display: grid;
-    grid-template-rows: 2;
+    grid-template-rows: 3;
+    grid-gap: 10px;
 }
 
 .skill {
@@ -8,8 +9,9 @@
     padding: 20px;
     width: 100px;
     height: 100px;
+    margin: 10px;
     background-color: red;
-    grid-row: 1;
+    display: inline-block;
 }
 
 .skill-unlocked {
@@ -20,14 +22,17 @@
     background-color: gray;
 }
 
-.skill-depth-1 {
+.SkillRow--1 {
     grid-row: 1;
+    text-align: center;
 }
 
-.skill-depth-2 {
+.SkillRow--2 {
     grid-row: 2;
+    text-align: center;
 }
 
-.skill-depth-3 {
+.SkillRow--3 {
     grid-row: 3;
+    text-align: center;
 }

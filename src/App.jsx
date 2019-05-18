@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Skill from "./components/Skill";
+import SkillRow from "./components/SkillRow";
 import "./styles/App.css";
 
 class App extends Component {
@@ -218,21 +219,81 @@ class App extends Component {
                 {this.state.maximumSkillPoints - this.state.currentSkillPoints}
                 <div className="skills">
                     <br />
-                    {this.state.skills.map(skill => {
-                        return (
-                            <Skill
-                                key={skill.id}
-                                skill={skill}
-                                unlockedSkills={this.state.ownedSkills}
-                                hidden={
-                                    skill.depth > this.state.depthReached + 1
-                                        ? true
-                                        : false
-                                }
-                                handleLock={this.handleLock}
-                            />
-                        );
-                    })}
+                    {/* <SkillRow
+                        toDisplay={this.state.skills.map(skill => {
+                            return (
+                                <Skill
+                                    key={skill.id}
+                                    skill={skill}
+                                    unlockedSkills={this.state.ownedSkills}
+                                    hidden={
+                                        skill.depth >
+                                        this.state.depthReached + 1
+                                            ? true
+                                            : false
+                                    }
+                                    handleLock={this.handleLock}
+                                />
+                            );
+                        })}
+                    /> */}
+                    <SkillRow
+                        rowDepth="1"
+                        toDisplay={this.state.skills.map(skill => {
+                            return skill.depth === 1 ? (
+                                <Skill
+                                    key={skill.id}
+                                    skill={skill}
+                                    unlockedSkills={this.state.ownedSkills}
+                                    hidden={
+                                        skill.depth >
+                                        this.state.depthReached + 1
+                                            ? true
+                                            : false
+                                    }
+                                    handleLock={this.handleLock}
+                                />
+                            ) : null;
+                        })}
+                    />
+                    <SkillRow
+                        rowDepth="2"
+                        toDisplay={this.state.skills.map(skill => {
+                            return skill.depth === 2 ? (
+                                <Skill
+                                    key={skill.id}
+                                    skill={skill}
+                                    unlockedSkills={this.state.ownedSkills}
+                                    hidden={
+                                        skill.depth >
+                                        this.state.depthReached + 1
+                                            ? true
+                                            : false
+                                    }
+                                    handleLock={this.handleLock}
+                                />
+                            ) : null;
+                        })}
+                    />
+                    <SkillRow
+                        rowDepth="3"
+                        toDisplay={this.state.skills.map(skill => {
+                            return skill.depth === 3 ? (
+                                <Skill
+                                    key={skill.id}
+                                    skill={skill}
+                                    unlockedSkills={this.state.ownedSkills}
+                                    hidden={
+                                        skill.depth >
+                                        this.state.depthReached + 1
+                                            ? true
+                                            : false
+                                    }
+                                    handleLock={this.handleLock}
+                                />
+                            ) : null;
+                        })}
+                    />
                 </div>
             </div>
         );

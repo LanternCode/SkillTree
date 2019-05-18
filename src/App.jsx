@@ -114,7 +114,8 @@ class App extends Component {
         maximumSkillPoints: 10,
         currentSkillPoints: 0,
         ownedSkills: [],
-        depthReached: 0
+        depthReached: 0,
+        rowCount: 3
     };
 
     handleLock = (skill, cannotBeUnlocked) => {
@@ -213,87 +214,40 @@ class App extends Component {
     };
 
     render() {
+        //make all rows that will contain skills
+        let skillRows = [];
+        for (let i = 0; i < this.state.rowCount; ++i) {
+            skillRows.push(
+                <SkillRow
+                    rowDepth={i + 1}
+                    toDisplay={this.state.skills.map(skill => {
+                        //map all skills to their rows
+                        return skill.depth === i + 1 ? (
+                            <Skill
+                                key={skill.id}
+                                skill={skill}
+                                unlockedSkills={this.state.ownedSkills}
+                                hidden={
+                                    skill.depth > this.state.depthReached + 1
+                                        ? true
+                                        : false
+                                }
+                                handleLock={this.handleLock}
+                            />
+                        ) : null; //if skill does not match to that row, return null
+                    })}
+                />
+            );
+        }
+
+        //what will be displayed on screen
         return (
             <div>
                 Remaining Skill Points:{" "}
                 {this.state.maximumSkillPoints - this.state.currentSkillPoints}
                 <div className="skills">
                     <br />
-                    {/* <SkillRow
-                        toDisplay={this.state.skills.map(skill => {
-                            return (
-                                <Skill
-                                    key={skill.id}
-                                    skill={skill}
-                                    unlockedSkills={this.state.ownedSkills}
-                                    hidden={
-                                        skill.depth >
-                                        this.state.depthReached + 1
-                                            ? true
-                                            : false
-                                    }
-                                    handleLock={this.handleLock}
-                                />
-                            );
-                        })}
-                    /> */}
-                    <SkillRow
-                        rowDepth="1"
-                        toDisplay={this.state.skills.map(skill => {
-                            return skill.depth === 1 ? (
-                                <Skill
-                                    key={skill.id}
-                                    skill={skill}
-                                    unlockedSkills={this.state.ownedSkills}
-                                    hidden={
-                                        skill.depth >
-                                        this.state.depthReached + 1
-                                            ? true
-                                            : false
-                                    }
-                                    handleLock={this.handleLock}
-                                />
-                            ) : null;
-                        })}
-                    />
-                    <SkillRow
-                        rowDepth="2"
-                        toDisplay={this.state.skills.map(skill => {
-                            return skill.depth === 2 ? (
-                                <Skill
-                                    key={skill.id}
-                                    skill={skill}
-                                    unlockedSkills={this.state.ownedSkills}
-                                    hidden={
-                                        skill.depth >
-                                        this.state.depthReached + 1
-                                            ? true
-                                            : false
-                                    }
-                                    handleLock={this.handleLock}
-                                />
-                            ) : null;
-                        })}
-                    />
-                    <SkillRow
-                        rowDepth="3"
-                        toDisplay={this.state.skills.map(skill => {
-                            return skill.depth === 3 ? (
-                                <Skill
-                                    key={skill.id}
-                                    skill={skill}
-                                    unlockedSkills={this.state.ownedSkills}
-                                    hidden={
-                                        skill.depth >
-                                        this.state.depthReached + 1
-                                            ? true
-                                            : false
-                                    }
-                                    handleLock={this.handleLock}
-                                />
-                            ) : null;
-                        })}
-                    />
+                    {skillRows}
                 </div>
             </div>
         );

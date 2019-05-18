@@ -8,11 +8,12 @@
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     margin: 10px;
     background-color: red;
     display: inline-block;
+    overflow: hidden;
 }
 
 .skill-unlocked {
@@ -36,4 +37,23 @@
 .SkillRow--3 {
     grid-row: 3;
     text-align: center;
+}
+
+.SkillRow--4 {
+    grid-row: 4;
+    text-align: center;
+}
+
+.SkillRow--5 {
+    grid-row: 5;
+    text-align: center;
+}
+
+.skillName {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.skillDescription {
+    font-size: 14px;
 }

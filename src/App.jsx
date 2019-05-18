@@ -8,114 +8,181 @@ class App extends Component {
         skills: [
             {
                 id: 0,
-                name: "Czytanie",
-                description: "aaaaaa",
+                name: "Otwieranie Zamków",
+                description: "Drewnianych.",
                 unlocked: false,
                 depth: 1,
                 requirements: []
             },
             {
                 id: 1,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Medytacja",
+                description: "Przywraca 1 hit. Odnawia się po przespaniu nocy.",
                 unlocked: false,
                 depth: 1,
                 requirements: []
             },
             {
                 id: 2,
-                name: "Gra",
-                description: "aaaaaa",
+                name: "Czytanie Hieroglifów",
+                description: "Poziom podstawowy.",
                 unlocked: false,
                 depth: 1,
                 requirements: []
             },
             {
                 id: 3,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Rozmowa ze Zwierzętami",
+                description: "Małymi.",
                 unlocked: false,
                 depth: 1,
                 requirements: []
             },
             {
                 id: 4,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Nos do Skarbów",
+                description: "+5 do rzutów za szukanie skarbu.",
                 unlocked: false,
                 depth: 2,
                 requirements: [0]
             },
             {
                 id: 5,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Wytwarzanie",
+                description: "Drewniana Tratwa (6 bali oraz narzędzia)",
                 unlocked: false,
                 depth: 2,
                 requirements: [0, 1]
             },
             {
                 id: 6,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Krąg Ochronny",
+                description: "-2 do rzutów za nocną zasadzkę.",
                 unlocked: false,
                 depth: 2,
                 requirements: [1, 2]
             },
             {
                 id: 7,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Infrawizja",
+                description: "Tylko parter/pierwsze piętro lokacji.",
                 unlocked: false,
                 depth: 2,
                 requirements: [2, 3]
             },
             {
                 id: 8,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Pielęgnowanie",
+                description: "I kultywowanie ogrodów.",
                 unlocked: false,
                 depth: 2,
                 requirements: [3]
             },
             {
                 id: 9,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Otwieranie Zamków",
+                description: "Klasycznych.",
                 unlocked: false,
                 depth: 3,
                 requirements: [4, 5]
             },
             {
                 id: 10,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Mała Eksplozja",
+                description:
+                    "Zaklęcie ofensywne które zadaje 1-4 hit(y) każdemu wrogowi raz podczas walki.",
                 unlocked: false,
                 depth: 3,
                 requirements: [5, 6]
             },
             {
                 id: 11,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Zakup: Flara",
+                description:
+                    "Odkrywa następną pułapkę jeśli ta została aktywowana i ją neutralizuje.",
                 unlocked: false,
                 depth: 3,
                 requirements: [6, 7]
             },
             {
                 id: 12,
-                name: "Pisanie",
-                description: "aaaaaaa",
+                name: "Język Natury",
+                description: "Pozwala rozmawiać ze zwierzętami i roślinami.",
                 unlocked: false,
                 depth: 3,
                 requirements: [7, 8]
+            },
+            {
+                id: 13,
+                name: "Łowca Okazji",
+                description:
+                    "Zawsze znajdziesz przynajmniej jedną przecenę w mieście.",
+                unlocked: false,
+                depth: 4,
+                requirements: [9, 10]
+            },
+            {
+                id: 14,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 4,
+                requirements: [10, 11]
+            },
+            {
+                id: 15,
+                name: "Uwodzenie",
+                description: "Pozwala uwodzić osoby tej samej rasy.",
+                unlocked: false,
+                depth: 4,
+                requirements: [11, 12]
+            },
+            {
+                id: 16,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 5,
+                requirements: [13]
+            },
+            {
+                id: 17,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 5,
+                requirements: [13, 14]
+            },
+            {
+                id: 18,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 5,
+                requirements: [14]
+            },
+            {
+                id: 19,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 5,
+                requirements: [14, 15]
+            },
+            {
+                id: 20,
+                name: "TBA",
+                description: "TBA",
+                unlocked: false,
+                depth: 5,
+                requirements: [15]
             }
         ],
         maximumSkillPoints: 10,
         currentSkillPoints: 0,
         ownedSkills: [],
         depthReached: 0,
-        rowCount: 3,
+        rowCount: 5,
         statusMessage: "",
         statusMessageType: ""
     };

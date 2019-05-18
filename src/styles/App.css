@@ -11,3 +11,16 @@
 body {
     background-color: #ededed;
 }
+
+.statusMessage {
+    display: block;
+    margin: 10px;
+}
+
+.statusMessage--success {
+    color: green;
+}
+
+.statusMessage--error {
+    color: red;
+}

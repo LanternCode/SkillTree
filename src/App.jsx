@@ -115,7 +115,9 @@ class App extends Component {
         currentSkillPoints: 0,
         ownedSkills: [],
         depthReached: 0,
-        rowCount: 3
+        rowCount: 3,
+        statusMessage: "",
+        statusMessageType: ""
     };
 
     handleLock = (skill, cannotBeUnlocked) => {
@@ -188,8 +190,19 @@ class App extends Component {
                 }
 
                 this.setState({ skills });
+
+                let statusMessage = "You have succesfully cancelled a skill.";
+                this.setState({ statusMessage });
+
+                let statusMessageType = "success";
+                this.setState({ statusMessageType });
             } else {
-                //you cannot cancel this skill because you have already unlocked another skill requiring this skill
+                let statusMessage =
+                    "You cannot cancel this skill because you have already unlocked another skill requiring this skill.";
+                this.setState({ statusMessage });
+
+                let statusMessageType = "error";
+                this.setState({ statusMessageType });
             }
         } else if (!cannotBeUnlocked) {
             //buy new skill
@@ -207,9 +220,18 @@ class App extends Component {
                     this.setState({ depthReached });
 
                 this.setState({ skills });
+
+                let statusMessage = "Success! You have unlocked a new skill!";
+                this.setState({ statusMessage });
+                let statusMessageType = "success";
+                this.setState({ statusMessageType });
             }
         } else {
-            //skill cannot be unlocked as it requires preceeding skills
+            let statusMessage =
+                "This skill cannot be unlocked as it requires a preceeding skill.";
+            this.setState({ statusMessage });
+            let statusMessageType = "error";
+            this.setState({ statusMessageType });
         }
     };
 
@@ -245,6 +267,15 @@ class App extends Component {
             <div>
                 Remaining Skill Points:{" "}
                 {this.state.maximumSkillPoints - this.state.currentSkillPoints}
+                <span
+                    className={
+                        "statusMessage " +
+                        "statusMessage--" +
+                        this.state.statusMessageType
+                    }
+                >
+                    {this.state.statusMessage}
+                </span>
                 <div className="skills">
                     <br />
                     {skillRows}

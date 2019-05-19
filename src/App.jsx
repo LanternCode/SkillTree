@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Skill from "./components/Skill";
 import SkillRow from "./components/SkillRow";
+import { base } from "./base";
 import "./styles/App.css";
 
 class App extends Component {
@@ -186,6 +187,17 @@ class App extends Component {
         statusMessage: "",
         statusMessageType: ""
     };
+
+    componentWillMount() {
+        this.skillRef = base.syncState("skills", {
+            context: this,
+            state: "skills"
+        });
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.skillRef);
+    }
 
     handleLock = (skill, cannotBeUnlocked) => {
         const skills = [...this.state.skills];

@@ -16,7 +16,7 @@ class App extends Component {
         rowCount: 5,
         statusMessage: "",
         statusMessageType: "",
-        allowSkillAddition: false,
+        allowSkillAddition: true,
         allowSkillCancelling: true
     };
 
@@ -35,7 +35,7 @@ class App extends Component {
         let skills = [...this.state.skills];
 
         let skillReqs = skill.sReqs.split(",").map(skillReq => {
-            return Number(skillReq);
+            return Number(skillReq) - 1;
         });
 
         skills.push({

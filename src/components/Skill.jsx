@@ -28,7 +28,9 @@ class Skill extends Component {
                 {this.props.hidden ? (
                     "?"
                 ) : (
-                    <span className="skillName">{this.props.skill.name}</span>
+                    <span className="skillName">
+                        ({this.props.skill.id + 1}) {this.props.skill.name}
+                    </span>
                 )}
                 <br />
                 {this.props.hidden ? (

@@ -11,9 +11,14 @@ class AddSkillForm extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.state.sName && this.state.sDesc && this.state.sDepth) {
-            let toReturn = this.state;
-            this.setState({ sName: "", sDesc: "", sDepth: "", sReqs: "" });
-            return this.props.handleNewSkill(toReturn);
+            try {
+                Number(this.state.sDepth);
+                let toReturn = this.state;
+                this.setState({ sName: "", sDesc: "", sDepth: "", sReqs: "" });
+                return this.props.handleNewSkill(toReturn);
+            } catch (e) {
+                return e.value; //Row must be a number
+            }
         }
     };
 
@@ -67,7 +72,7 @@ class AddSkillForm extends Component {
                     </label>
                     <br />
                     <label>
-                        Requirements:
+                        Required Skills (separate numbers with a comma):
                         <input
                             type="text"
                             name="SkillRequirements"

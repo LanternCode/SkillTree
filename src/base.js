@@ -13,5 +13,6 @@ const config = {
 
 const app = firebase.initializeApp(config);
 const base = Rebase.createClass(app.database());
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
-export { base };
+export { app, base, facebookProvider };

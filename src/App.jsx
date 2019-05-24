@@ -15,7 +15,9 @@ class App extends Component {
         depthReached: 0,
         rowCount: 5,
         statusMessage: "",
-        statusMessageType: ""
+        statusMessageType: "",
+        allowSkillAddition: false,
+        allowSkillCancelling: true
     };
 
     componentWillMount() {
@@ -50,9 +52,10 @@ class App extends Component {
 
     handleLock = (skill, cannotBeUnlocked) => {
         const skills = [...this.state.skills];
+        let attemptedCancelPrevented = false;
 
         //cancel skill
-        if (skill.unlocked) {
+        if (skill.unlocked && this.state.allowSkillCancelling) {
             let allowCancel = true;
             let allowCancelCounter = 0;
             let oldAllowCancel = true;
@@ -132,7 +135,14 @@ class App extends Component {
                 let statusMessageType = "error";
                 this.setState({ statusMessageType });
             }
-        } else if (!cannotBeUnlocked) {
+        } else if (skill.unlocked) {
+            let statusMessage =
+                "You are not allowed to cancel skills, contact the GM to enable that function.";
+            this.setState({ statusMessage });
+            let statusMessageType = "error";
+            this.setState({ statusMessageType });
+            attemptedCancelPrevented = true;
+        } else if (!cannotBeUnlocked && attemptedCancelPrevented === false) {
             //buy new skill
             const currentSkillPoints = this.state.currentSkillPoints + 1;
             if (currentSkillPoints <= this.state.maximumSkillPoints) {
@@ -154,7 +164,7 @@ class App extends Component {
                 let statusMessageType = "success";
                 this.setState({ statusMessageType });
             }
-        } else {
+        } else if (attemptedCancelPrevented === false) {
             let statusMessage =
                 "This skill cannot be unlocked as it requires a preceeding skill.";
             this.setState({ statusMessage });
@@ -209,7 +219,10 @@ class App extends Component {
                     <br />
                     {skillRows}
                 </div>
-                <AddSkillForm handleNewSkill={this.handleNewSkill} />
+                {this.state.allowSkillAddition ? (
+                    //if the allowSkillAddition is true, display the "Add New Skill" form
+                    <AddSkillForm handleNewSkill={this.handleNewSkill} />
+                ) : null}
             </>
         );
     }

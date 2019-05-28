@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Header from "./components/Header";
-import Skill from "./components/Skill";
-import SkillRow from "./components/SkillRow";
-import AddSkillForm from "./components/AddSkillForm";
-import { base } from "./base";
-import "./styles/App.css";
+import Skill from "./secondary/Skill";
+import SkillRow from "./secondary/SkillRow";
+import AddSkillForm from "./secondary/AddSkillForm";
+import { base } from "../base";
+import "../styles/App.css";
 
-class App extends Component {
+class SkillTree extends Component {
     state = {
         skills: [],
         maximumSkillPoints: 10,
@@ -228,4 +227,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default SkillTree;

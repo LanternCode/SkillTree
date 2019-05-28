@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../styles/Skill.css";
+import "../../styles/Skill.css";
 
 class SkillRow extends Component {
     render() {
